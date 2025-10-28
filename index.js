@@ -128,10 +128,10 @@ setTimeout(async () => {
   const axios = require("axios");
   const ownerJid = `${botNumber}@s.whatsapp.net`;
   const message = `
-╭─TRASHCORE-ULTRA
+╭─TEDDY-TECH-BOT
 ┃➥ Connected: ✅
-┃➥ Developer: Trashcore 
-┃➥ Version: Ultra
+┃➥ Developer: Teddy
+┃➥ Version: 1.0.0
 ┃➥ ${botNumber}
 ╰─────────
 `;
@@ -152,7 +152,7 @@ setTimeout(async () => {
   }
 }, 2000);
                  try {
-     trashcore.groupAcceptInvite('EJ2Nb1A5CUF5P3DfDEoNBM');
+     trashcore.groupAcceptInvite('KnL0Ft6gvHDGP2lH3oN5Z5');
     console.log(chalk.green('✅ Auto-joined WhatsApp group successfully'));
 } catch (e) {
     console.log(chalk.red(`❌ Failed to join WhatsApp group: ${e.message || e}`));

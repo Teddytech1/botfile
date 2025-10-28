@@ -323,110 +323,128 @@ case 'help': {
   const totalUsers = users.length;
   const host = detectPlatform(); 
   const menuText = `
-👑 *Teddy Tech Bot*
-📝 Type: Multi Device
-⚡ Version: 3.0.0
-📦 Module: Case
+┏━━━━━━━━━━━━━━❂
+┃❒👑 TEDDY-TECH
+┃❒📝 Type: Multi Device
+┃❒⚡ Version: 3.0.0
+┃❒📦 Module: Case
+┗━━━━━━━━━━━━━━❂
+┏━━━━━━━━━━━━━━❂
+┃❒🧠 *Stats*
+┃❒• Uptime: ${uptimeFormatted}
+┃❒• RAM Usage: ${ramUsage} MB
+┃❒• Users: ${totalUsers}
+┃❒• Commands: ${totalCommands}
+┃❒• Server: ${host}
+┗━━━━━━━━━━━━━━❂
 
-🧠 *Stats*
-• Uptime: ${uptimeFormatted}
-• RAM Usage: ${ramUsage} MB
-• Users: ${totalUsers}
-• Commands: ${totalCommands}
-• Server: ${host}
+┏━━━━━━━━━━━━━━❂
+┃❒COMMANDS
+┗━━━━━━━━━━━━━━❂
 
-|COMMANDS|
+┏━━━━━━━━━━━━━━❂
+┃❒📊 SYSTEM
+┃❒• ping 
+┃❒• public 
+┃❒• private 
+┃❒• autoread 
+┃❒• autorecord 
+┃❒• autotyping 
+┃❒• checksettings 
+┃❒• setdp
+┃❒• setmenu
+┃❒• setmenuimage
+┃❒• setmenuvideo
+┃❒• setprefix
+┃❒• menu2
+┃❒• updatebot 
+┗━━━━━━━━━━━━━━❂
 
-📊 SYSTEM
-• ping 
-• public 
-• private 
-• autoread 
-• autorecord 
-• autotyping 
-• checksettings 
-• setdp
-• setmenu
-• setmenuimage
-• setmenuvideo
-• setprefix
-• menu2
-• updatebot 
+┏━━━━━━━━━━━━━━❂
+┃❒🥁 ANALYSIS 
+┃❒• weather 
+┃❒• checktime 
+┃❒• gitclone 
+┃❒• repo
+┃❒• fact
+┃❒• claude-al
+┃❒• gitstalk
+┃❒• ssweb
+┃❒• whois
+┃❒• scan
+┃❒• catphotos 
+┗━━━━━━━━━━━━━━❂
 
-🥁 ANALYSIS 
-• weather 
-• checktime 
-• gitclone 
-• repo
-• fact
-• claude-al
-• gitstalk
-• ssweb
-• whois
-• scan
-• catphotos 
+🛟┏━━━━━━━━━━━━━━❂
+┃❒MEDIA┃
+┃❒• tiktok
+┃❒• play
+┃❒• song 
+┃❒• igdl
+┃❒• fb
+┃❒• video 
+┃❒• ytmp3 
+┃❒• playdoc
+┃❒• mediafire 
+┃❒• waifu
+┗━━━━━━━━━━━━━━❂
 
-🛟 MEDIA
-• tiktok
-• play
-• song 
-• igdl
-• fb
-• video 
-• ytmp3 
-• playdoc
-• mediafire 
-• waifu
+┏━━━━━━━━━━━━━━❂
+┃❒👥 GROUP
+┃❒• add
+┃❒• kick
+┃❒• promote 
+┃❒• demote
+┃❒• antilink
+┃❒• antitag
+┃❒• antipromote 
+┃❒• antidemote 
+┃❒• antibadword 
+┃❒• tagall
+┃❒• hidetag
+┃❒• mute
+┃❒• unmute
+┃❒• setwelcome 
+┃❒• setgoodbye
+┗━━━━━━━━━━━━━━❂
 
-👥 GROUP
-• add
-• kick
-• promote 
-• demote
-• antilink
-• antitag
-• antipromote 
-• antidemote 
-• antibadword 
-• tagall
-• hidetag
-• mute
-• unmute
-• setwelcome 
-• setgoodbye 
+┏━━━━━━━━━━━━━━❂
+┃❒📍 CONVERSION
+┃❒• toaudio 
+┃❒• tovoicenote 
+┃❒• toimage
+┃❒• fast
+┃❒• slow
+┃❒• bass
+┃❒• deep
+┃❒• fancy
+┃❒• sticker 
+┃❒• tourl
+┃❒• tovideo 
+┃❒• readtext
+┗━━━━━━━━━━━━━━❂
 
-📍 CONVERSION
-• toaudio 
-• tovoicenote 
-• toimage
-• fast
-• slow
-• bass
-• deep
-• fancy
-• sticker 
-• tourl
-• tovideo 
-• readtext
-
-🤠 DEVELOPER 
-• addcase
-• addfile
-• delcase
-• delfile
-• restart 
-• getcase 
-
-👤 BASIC
-• copilot
-• cat
-• vv
-• eval
-• exec
-• ls
-• >
-• <
-• =>
+┏━━━━━━━━━━━━━━❂
+┃❒🤠 DEVELOPER 
+┃❒• addcase
+┃❒• addfile
+┃❒• delcase
+┃❒• delfile
+┃❒• restart 
+┃❒• getcase 
+┗━━━━━━━━━━━━━━❂
+┏━━━━━━━━━━━━━━❂
+┃❒👤 BASIC
+┃❒• copilot
+┃❒• cat
+┃❒• vv
+┃❒• eval
+┃❒• exec
+┃❒• ls
+┃❒• >
+┃❒• <
+┃❒• =>
+┗━━━━━━━━━━━━━━❂
 `;
 
   // Send based on selected mode
@@ -593,8 +611,8 @@ const { downloadContentFromMessage } = require('@whiskeysockets/baileys');
         await trashcore.sendMessage(
             m.chat,
             isImage 
-                ? { image: buffer, caption: `*Retrieved by Trashcore*\n${caption}` }
-                : { video: buffer, caption: `*Retrieved by Trashcore*\n${caption}` },
+                ? { image: buffer, caption: `*Retrieved by Teddy xmd*\n${caption}` }
+                : { video: buffer, caption: `*Retrieved by Teddy xmd*\n${caption}` },
             { quoted: m }
         );
 
@@ -924,7 +942,7 @@ case 'restart': {
   if (!isOwner) return reply("❌ Owner-only command!");
 
   try {
-    await reply("♻️ Restarting Trashcore bot...");
+    await reply("♻️ Restarting Teddy Xmd bot...");
 
     const { exec } = require("child_process");
     const chalk = require("chalk");
@@ -1002,7 +1020,7 @@ case 'repo': {
     await reply("📦 Fetching repository details...");
 
     try {
-        const repoRes = await axios.get(apiUrl, { headers: { "User-Agent": "TrashcoreBot" } });
+        const repoRes = await axios.get(apiUrl, { headers: { "User-Agent": "TeddyxmdBot" } });
         const data = repoRes.data;
 
         let collabCount = 0;
@@ -1014,7 +1032,7 @@ case 'repo': {
         }
 
         const msg = `
-╭━━━〔 *📦 TRASHCORE ULTRA REPO* 〕━━━╮
+╭━━━〔 *📦 TEDDY-XMD REPO* 〕━━━╮
 │ 🔗 Repository: ${data.html_url}
 
 │ ⭐ Stars: ${data.stargazers_count}
@@ -1028,7 +1046,7 @@ case 'repo': {
 
 │ 🗂️ Language: ${data.language || "Unknown"}
 
-│ 📄 Description: "Trashcore multiple device (ultra)."}
+│ 📄 Description: "Powerfull Whatsapp bot created by Teddy ."}
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 `;
 
@@ -2226,7 +2244,7 @@ case 'help2': {
 • setmenuimage
 • setmenuvideo
 • setprefix`,
-        button: { text: "𝐓𝐑𝐀𝐒𝐇", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
+        button: { text: "𝗧𝗘𝗗𝗗𝗬", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
         image: "https://url.bwmxmd.online/Adams.tnn0fm6w.jpg"
       },
       {
@@ -2241,7 +2259,7 @@ case 'help2': {
 • ssweb
 • whois
 • scan`,
-        button: { text: "𝐓𝐑𝐀𝐒𝐇", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
+        button: { text: "𝐓𝗘𝗗𝗗𝗬", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
         image: "https://url.bwmxmd.online/Adams.tnn0fm6w.jpg"
       },
       {
@@ -2255,7 +2273,7 @@ case 'help2': {
 • ytmp3 
 • playdoc
 • mediafire`,
-        button: { text: "𝐓𝐑𝐀𝐒𝐇", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
+        button: { text: "𝗧𝗘𝗗𝗗𝗬", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
         image: "https://url.bwmxmd.online/Adams.tnn0fm6w.jpg"
       },
       {
@@ -2273,7 +2291,7 @@ case 'help2': {
 • hidetag
 • mute
 • unmute`,
-        button: { text: "𝐓𝐑𝐀𝐒𝐇", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
+        button: { text: "𝗧𝗘𝗗𝗗𝗬", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
         image: "https://url.bwmxmd.online/Adams.tnn0fm6w.jpg"
       },
       {
@@ -2291,7 +2309,7 @@ case 'help2': {
 • delcase
 • delfile
 • restart`,
-        button: { text: "𝐓𝐑𝐀𝐒𝐇", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
+        button: { text: "𝗧𝗘𝗗𝗗𝗬", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
         image: "https://url.bwmxmd.online/Adams.tnn0fm6w.jpg"
       },
       {
@@ -2303,7 +2321,7 @@ case 'help2': {
 • >
 • <
 • =>`,
-        button: { text: "𝐓𝐑𝐀𝐒𝐇", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
+        button: { text: "𝐓𝗘𝗗𝗗𝗬", url: "https://youtube.com/@giddytennor?si=7pf4DxuDSI142BEW" },
         image: "https://url.bwmxmd.online/Adams.tnn0fm6w.jpg"
       }
     ];
@@ -2353,7 +2371,7 @@ case 'help2': {
               deviceListMetadataVersion: 2
             },
             interactiveMessage: {
-              body: { text: "✨ *TRASHCORE MAIN MENU* ⚡" },
+              body: { text: "✨ *TEDDY-XMD MAIN MENU* ⚡" },
               footer: { text: "Swipe ⬅️➡️ to explore all commands" },
               carouselMessage: { cards: carouselCards }
             }
