@@ -375,7 +375,7 @@ case 'help': {
 ┃❒• catphotos 
 ┗━━━━━━━━━━━━━━❂
 
-🛟┏━━━━━━━━━━━━━━❂
+┏━━━━━━━━━━━━━━❂
 ┃❒MEDIA┃
 ┃❒• tiktok
 ┃❒• play
@@ -1012,8 +1012,8 @@ if (!isOwner) return reply('❌ Only the bot owner can use this command.');
             // ================= REPO =================
 case 'repo': {
     const axios = require('axios');
-    const owner = "Tennor-modz";
-    const repo = "trashcore-ultra";
+    const owner = "Teddytech1";
+    const repo = "TEDDY-XMD";
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
     const collabUrl = `https://api.github.com/repos/${owner}/${repo}/collaborators`;
 
@@ -1025,7 +1025,7 @@ case 'repo': {
 
         let collabCount = 0;
         try {
-            const collabRes = await axios.get(collabUrl, { headers: { "User-Agent": "TrashcoreBot" } });
+            const collabRes = await axios.get(collabUrl, { headers: { "User-Agent": "TeddyxmdBot" } });
             collabCount = collabRes.data.length;
         } catch {
             collabCount = "Private/Hidden";
