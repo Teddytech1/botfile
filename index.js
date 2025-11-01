@@ -51,9 +51,9 @@ const credsPath = path.join(sessionDir, 'creds.json');
 async function saveSessionFromConfig() {
   try {
     if (!config.SESSION_ID) return false;
-    if (!config.SESSION_ID.includes('trashcore~')) return false;
+    if (!config.SESSION_ID.includes('TEDDY-XMD~')) return false;
 
-    const base64Data = config.SESSION_ID.split("trashcore~")[1];
+    const base64Data = config.SESSION_ID.split("TEDDY-XMD~")[1];
     if (!base64Data) return false;
 
     const sessionData = Buffer.from(base64Data, 'base64');
@@ -74,16 +74,20 @@ async function starttrashcore() {
   const { version } = await fetchLatestBaileysVersion();
 
   const trashcore = makeWASocket({
-    version,
-    keepAliveIntervalMs: 10000,
-    printQRInTerminal: false,
-    logger: pino({ level: 'silent' }),
-    auth: {
-      creds: state.creds,
-      keys: makeCacheableSignalKeyStore(state.keys, pino({ level: 'silent' }).child({ level: 'silent' }))
-    },
-    browser: ["Ubuntu", "Chrome", "20.0.00"]
-  });
+  version, 
+  keepAliveIntervalMs: 10000,
+  printQRInTerminal: false,
+  logger: pino({ level: 'silent' }),
+  auth: {
+    creds: state.creds,
+    keys: makeCacheableSignalKeyStore(
+      state.keys,
+      pino({ level: 'silent' }).child({ level: 'silent' })
+    )
+  },
+  browser: ["Ubuntu", "Chrome", "20.0.00"],
+  syncFullHistory: true 
+});
 
   trashcore.ev.on('creds.update', saveCreds);
 
@@ -123,32 +127,23 @@ async function starttrashcore() {
       log.success(`Bot connected as ${chalk.green(botNumber)}`);
       try { rl.close(); } catch (e) {}
 
-      // Send DM to paired number
+      // ✅ Send DM to paired number after successful pairing
 setTimeout(async () => {
-  const axios = require("axios");
-  const ownerJid = `${botNumber}@s.whatsapp.net`;
-  const message = `
-╭─TEDDY-TECH-BOT
+  try {
+    const ownerJid = `${botNumber}@s.whatsapp.net`; // Create full JID
+
+    const message = `
+╭─『 TEDDY XMD 』
 ┃➥ Connected: ✅
 ┃➥ Developer: Teddy
-┃➥ Version: 1.0.0
-┃➥ ${botNumber}
-╰─────────
+┃➥ Version: 3.0.0
+┃➥ Number: ${botNumber}
+╰───────────────
 `;
 
-  try {
     await trashcore.sendMessage(ownerJid, { text: message });
-    const audioUrl = "https://files.catbox.moe/coej4a.mp3"; 
-    const { data } = await axios.get(audioUrl, { responseType: "arraybuffer" });
-    await trashcore.sendMessage(ownerJid, {
-      audio: Buffer.from(data),
-      mimetype: "audio/mpeg",
-      ptt: false
-    });
-
-    log.success(`✅ Sent DM + Audio from URL to paired number (${botNumber})`);
-  } catch (err) {
-    log.error(`❌ Failed to send DM or Audio: ${err}`);
+  } catch (error) {
+    console.error("❌ Failed to send DM:", error);
   }
 }, 2000);
                  try {
@@ -163,7 +158,21 @@ setTimeout(async () => {
     }
   });
 
+const initAntiDelete = require('./antiDelete');
+trashcore.ev.on('connection.update', async (update) => {
+  const { connection } = update;
+  if (connection === 'open') {
+    const botNumber = trashcore.user.id.split(':')[0] + '@s.whatsapp.net';
 
+    initAntiDelete(trashcore, {
+      botNumber, // Automatically detected
+      dbPath: './library/antidelete.json',
+      enabled: true
+    });
+
+    console.log(`✅ AntiDelete active and sending deleted messages to ${botNumber}`);
+  }
+});
   // ================== Auto read/typing/record ==================
   async function autoReadPrivate(m) {
     const from = m.key.remoteJid;
@@ -200,7 +209,8 @@ trashcore.ev.on('messages.upsert', async chatUpdate => {
             }
     })
     
-    
+
+          
 trashcore.getName = async (jid) => {
   try {
     if (!jid) return 'Unknown';
@@ -220,6 +230,85 @@ trashcore.getName = async (jid) => {
     return jid.split('@')[0];
   }
 };
+
+const statsPath = path.join(__dirname, "library/groupStats.json");
+
+// ✅ Ensure the file exists
+if (!fs.existsSync(statsPath)) {
+  fs.writeFileSync(statsPath, JSON.stringify({}, null, 2));
+}
+
+let groupStats = {};
+try {
+  const data = fs.readFileSync(statsPath, "utf8");
+  groupStats = JSON.parse(data || "{}");
+} catch (err) {
+  console.error("❌ Failed to read groupStats.json:", err);
+  groupStats = {};
+}
+
+// 🧠 Debounce file writes (avoid writing too often)
+let saveTimeout;
+function saveStats() {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => {
+    try {
+      fs.writeFileSync(statsPath, JSON.stringify(groupStats, null, 2));
+    } catch (err) {
+      console.error("❌ Failed to save group stats:", err);
+    }
+  }, 5000);
+}
+
+trashcore.ev.on("messages.upsert", async ({ messages }) => {
+  const m = messages[0];
+  if (!m?.message) return; // skip empty/system messages
+  if (m.key.fromMe) return; // skip bot messages
+
+  m.chat = m.key.remoteJid;
+  const isGroup = m.chat.endsWith("@g.us");
+  const chatType = isGroup ? "Group" : "Private";
+  const senderId = m.key.participant || m.sender || m.chat;
+  const pushname = m.pushName || "Unknown";
+
+  // ✅ Use local fallback for name (no metadata fetch)
+  const chatName = isGroup ? m.chat.split("@")[0] : pushname;
+
+  // ✅ Only handle group messages
+  if (!isGroup) return;
+
+  // Initialize group if not exist
+  if (!groupStats[m.chat]) {
+    groupStats[m.chat] = {
+      groupName: chatName,
+      totalMessages: 0,
+      members: {}
+    };
+  }
+
+  const groupData = groupStats[m.chat];
+
+  // Update name if it changes (optional)
+  if (groupData.groupName !== chatName) {
+    groupData.groupName = chatName;
+  }
+
+  // Initialize user if not exist
+  if (!groupData.members[senderId]) {
+    groupData.members[senderId] = {
+      name: pushname,
+      messages: 0,
+      lastMessage: null
+    };
+  }
+
+  // Increment counters
+  groupData.totalMessages++;
+  groupData.members[senderId].messages++;
+  groupData.members[senderId].lastMessage = new Date().toISOString();
+
+  saveStats();
+});
 
 trashcore.ev.on('group-participants.update', async (update) => {
   try {
