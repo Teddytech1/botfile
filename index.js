@@ -61,7 +61,7 @@ function log(message, color = 'white', isError = false) {
 
 
 // --- GLOBAL FLAGS ---
-global.isBotConnected = false; 
+global.isBotConnected = true; 
 global.connectDebounceTimeout = null;
 // --- NEW: Error State Management ---
 global.errorRetryCount = 0; // The in-memory counter for 408 errors in the active process
