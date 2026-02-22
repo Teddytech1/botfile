@@ -1,0 +1,24 @@
+{
+  "name": "trashbot",
+  "version": "5.0.0",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+  "@trashcore/baileys": "latest",
+    "chalk": "^4.1.2",
+    "crypto": "^1.0.1",
+    "axios": "^0.27.2",
+    "api-dylux": "^1.8.5",
+    "node-fetch": "^3.3.2",
+    "node-webpmux": "^3.1.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "webp-converter": "latest",
+    "yt-search": "^2.10.4",
+    "pino": "^8.17.0",
+    "better-sqlite3": "latest",
+    "jimp":"latest"
+  }
+}
